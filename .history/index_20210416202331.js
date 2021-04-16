@@ -29,7 +29,6 @@ client.connect((err) => {
     .collection("services");
     const orderCollection = client.db("interiorDesign").collection("orders");
     const reviewCollection = client.db("interiorDesign").collection("reviews");
-    const adminCollection = client.db("interiorDesign").collection("adminPanel");
 
   console.log("database connected");
 
@@ -38,6 +37,7 @@ client.connect((err) => {
     const service = req.body;
     serviceCollection.insertOne(service)
       .then((result) => {
+        console.log(result);
       res.send(result.insertedCount > 0);
     });
   });
@@ -54,20 +54,23 @@ client.connect((err) => {
           .find({ _id: ObjectId(findService) })
           .toArray((err, documents) => {
             res.send(documents);
+            console.log(documents);
           });
     })
   app.post('/processOrder', (req, res) => {
     orderCollection.insertOne(req.body)
       .then((result) => {
+        console.log(result);
         res.send(result.insertedCount > 0);
       });
   });
 
-  app.post('/order', (req, res) => {
+  app.post('/orderList', (req, res) => {
     console.log(req.body);
     orderCollection.find({ email: req.body.email })
       .toArray((err, documents) => {
         res.send(documents)
+        console.log(documents);
     })
   })
   app.post('/review', (req, res) => {
@@ -81,23 +84,9 @@ client.connect((err) => {
   app.get('/setReview', (req, res) => {
     reviewCollection.find({})
       .toArray((err, documents) => {
-        res.send(documents)
-      })
-  });
-  app.get('/orderList', (req, res) => {
-    orderCollection.find({})
-      .toArray((err, documents) => {
       res.send(documents)
     })
   })
-  app.post('/addAdmin', (req, res) => {
-    console.log(req.body);
-    adminCollection.insertOne(req.body)
-      .then(result => {
-        res.send(result.insertedCount > 0);
-    })
-  })
-
   // app.post("/appointmentsByDate", (req, res) => {
   //   const date = req.body;
   //   const email = req.body.email;

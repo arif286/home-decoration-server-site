@@ -92,10 +92,10 @@ client.connect((err) => {
   })
   app.post('/addAdmin', (req, res) => {
     console.log(req.body);
-    adminCollection.insertOne(req.body)
-      .then(result => {
-        res.send(result.insertedCount > 0);
-    })
+    // adminCollection.insertOne(req.body)
+    //   .then(result => {
+    //     res.send(result.insertedCount > 0);
+    // })
   })
 
   // app.post("/appointmentsByDate", (req, res) => {

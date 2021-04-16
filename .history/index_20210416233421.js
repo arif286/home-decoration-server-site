@@ -38,6 +38,7 @@ client.connect((err) => {
     const service = req.body;
     serviceCollection.insertOne(service)
       .then((result) => {
+        console.log(result);
       res.send(result.insertedCount > 0);
     });
   });
@@ -54,11 +55,13 @@ client.connect((err) => {
           .find({ _id: ObjectId(findService) })
           .toArray((err, documents) => {
             res.send(documents);
+            console.log(documents);
           });
     })
   app.post('/processOrder', (req, res) => {
     orderCollection.insertOne(req.body)
       .then((result) => {
+        console.log(result);
         res.send(result.insertedCount > 0);
       });
   });
@@ -68,6 +71,7 @@ client.connect((err) => {
     orderCollection.find({ email: req.body.email })
       .toArray((err, documents) => {
         res.send(documents)
+        console.log(documents);
     })
   })
   app.post('/review', (req, res) => {
