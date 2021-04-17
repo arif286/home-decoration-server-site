@@ -129,13 +129,20 @@ client.connect((err) => {
     })
   });
 
- app.post("/isAdmin", (req, res) => {
-   const email = req.body.email;
-   console.log(email);
-   adminCollection.find({ email: email }).toArray((err, doctors) => {
-     res.send(doctors.length > 0);
-   });
- });
+  // app.post("/appointmentsByDate", (req, res) => {
+  //   const date = req.body;
+  //   const email = req.body.email;
+  //   doctorCollection.find({ email: email }).toArray((err, doctors) => {
+  //     const filter = { date: date.date };
+  //     if (doctors.length === 0) {
+  //       filter.email = email;
+  //     }
+  //     appointmentCollection.find(filter).toArray((err, documents) => {
+  //       console.log(email, date.date, doctors, documents);
+  //       res.send(documents);
+  //     });
+  //   });
+  // });
 
 
 });

@@ -130,11 +130,11 @@ client.connect((err) => {
   });
 
  app.post("/isAdmin", (req, res) => {
-   const email = req.body.email;
+   const email = req.body;
    console.log(email);
-   adminCollection.find({ email: email }).toArray((err, doctors) => {
-     res.send(doctors.length > 0);
-   });
+  //  adminCollection.find({ email: email }).toArray((err, doctors) => {
+  //    res.send(doctors.length > 0);
+  //  });
  });
 
 
